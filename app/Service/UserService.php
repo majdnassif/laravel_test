@@ -3,19 +3,17 @@
 namespace App\Service;
 
 use App\Exceptions\CustomExceptions\CreateUserException;
-use App\Models\Image\Image;
 use App\Models\User\User;
 use App\Repository\User\UserRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UserService
 {
 
-private array $relationships = ['image'];
+private array $relationships = ['image','posts'];
   public function __construct(private UserRepository $userRepository,private ImageService $imageService)
   {
   }

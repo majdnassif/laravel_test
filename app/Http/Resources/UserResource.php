@@ -15,7 +15,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password,
-//            'post' =>new PostResource($this->posts),
+            'posts' =>   $this->posts,
             'image'=>$this->image ?$this->image['url'] : '',
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

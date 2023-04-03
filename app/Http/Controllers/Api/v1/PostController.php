@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Http\Resources\PostResource;
 use App\Service\PostService;
 use App\Traits\Helpers\ApiResponseTrait;
@@ -59,5 +60,24 @@ class PostController extends Controller
         }
     }
 
+
+
+    public function edit(PostUpdateRequest $request):JsonResponse
+    {
+
+        try {
+            if(!$this->postService->isPostExist($request->get('id')))
+                return $this->respondNotFound('Post Not Found!!');
+
+
+            if($this->postService->updatePost($request->get('id'),$request->all(),$request->file('image')))
+                return $this->respondSuccess(trans('general.update',['object' => 'User']));
+
+            return $this->respondError(trans('general.exception', ['object' => 'User']));
+
+        } catch (Exception $exception) {
+            return $this->respondError(trans('general.exception', ['object' => 'User']), $exception);
+        }
+    }
 
 }
